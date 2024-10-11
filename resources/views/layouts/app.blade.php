@@ -4,8 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>developeRReminder</title>
-  <link rel="stylesheet" href="{{asset('/../resources/css/app.css')}}">
 
+    <!-- Include Vite CSS -->
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="{{asset('/../resources/css/app.css')}}">
   @yield('styles')
 </head>
 <body>

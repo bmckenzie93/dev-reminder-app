@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
@@ -28,25 +29,26 @@ Route::get('/dashboard', function () {
 // /////////////////
 // PROJECT ROUTES //
 // /////////////////
+Route::resource('project', ProjectController::class);
 
 // Project create
-Route::get('/project/create', function () {
-    return view('project.create');
-})->name('project.create');
+// Route::get('/project/create', function () {
+//     return view('project.create');
+// })->name('project.create');
 
 // Project list
-Route::get('/project', function () {
-    return view('project.index', ['project' => Project::latest()->get() ]);
-})->name('project.index');
+// Route::get('/project', function () {
+//     return view('project.index', ['project' => Project::orderBy('id', 'asc')->get()]);
+// })->name('project.index');
 
 // Project show
-Route::get('/project/{project}', function (Project $project) {
-    return view('project.show', ['project' => $project ]);
-})->name('project.show');
+// Route::get('/project/{project}', function (Project $project) {
+//     return view('project.show', ['project' => $project ]);
+// })->name('project.show');
 
-Route::get('/project/{project}/edit', function (Project $project) {
-    return view('project.edit', ['project' => $project]);
-})->name('project.edit');
+// Route::get('/project/{project}/edit', function (Project $project) {
+//     return view('project.edit', ['project' => $project]);
+// })->name('project.edit');
 
 
 // Project post db

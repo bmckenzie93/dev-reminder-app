@@ -24,3 +24,4 @@ class ProjectFactory extends Factory
       ];
     }
 }
+

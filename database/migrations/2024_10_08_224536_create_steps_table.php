@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +13,9 @@ return new class extends Migration
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('project_id');
+            $table->foreignId('project_id')
+                ->constrained('projects')
+                ->onDelete('cascade');
 
             $table->text('title');
             $table->json('info');
@@ -22,11 +23,6 @@ return new class extends Migration
             $table->integer('stepNum');
 
             $table->timestamps();
-
-            $table->foreign('project_id')
-                ->references('id')
-                ->on('projects')
-                ->onDelete('cascade');
         });
     }
 
@@ -37,6 +33,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('steps');
     }
-
-
 };
