@@ -15,11 +15,10 @@
 @section('content')
   <a href="{{ route('dashboard') }}">Back to dashboard</a>
   
-  <h1>Edit Project #{{ $project->id }}</h1>
+  <h1>Create a project</h1>
 
-<form method="POST" action="{{ route('project.update', ['project' => $project->id]) }}">
+<form method="POST" action="{{ route('project.store') }}">
     @csrf
-    @method('PUT')
 
     <!-- Name Field -->
     <div class="form-group">
@@ -73,12 +72,4 @@
 </script>
 
 
-  <form method="POST" action="{{ route('project.destroy', ['project' => $project->id]) }}">
-    @csrf
-    @method('delete')
-    
-  <div class="form-group">
-      <button type="submit" class="btn btn-danger" id="delete">Delete Project</button>
-    </div>
-  </form>
 @endsection

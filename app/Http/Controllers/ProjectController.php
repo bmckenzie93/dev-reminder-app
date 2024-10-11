@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
@@ -34,38 +34,62 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate and create new project
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'steps' => 'nullable|array',
+        ]);
+
+        $project = Project::create($validated);
+
+        return redirect()->route('project.show', ['project' => $project->id])
+            ->with('success', 'Project created successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-
+        return view('project.show', ['project' => $project]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('project.edit', ['project' => $project]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        // Validate and update project
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'steps' => 'nullable|array',
+        ]);
+
+        $project->update($validated);
+
+        return redirect()->route('project.show', ['project' => $project->id])
+            ->with('success', 'Project updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        // Delete the project
+        $project->delete();
+
+        return redirect()->route('project.index')
+            ->with('success', 'Project has been deleted.');
     }
 }

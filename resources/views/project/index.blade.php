@@ -7,21 +7,20 @@
                 <h1 class="text-center">Project List</h1>
             </div>
             <div class="col-6 mx-auto">
-                <form method="GET" action="{{route('project.index')}}" class="">
+                <form method="GET" action="{{route('project.index')}}" class="d-flex">
                     <div class="form-group mb-0">
                         <input 
                             type="text" 
                             name="name" 
                             id="name" 
-                            class="form-control text-center" 
+                            class="form-control text-center flex-3" 
                             placeholder="Search by name.." 
                             value="{{request('name')}}">
                     </div>
-                    <div class="form-group d-flex justify-content-between w-100">
-                        <button type="submit" class="btn-link btn text-info mr-0 pr-0">Search</button>
-                        <a href="{{ route('project.index') }}" class="btn-link btn text-warning pl-0">clear filter</a>
-                    </div>
+                    
+                    <button type="submit" class="btn-link btn text-info mr-0 pr-0">Search</button>
                 </form>
+                <a href="{{ route('project.index') }}" class="btn-link btn text-warning ml-auto d-block">clear filter</a>
             </div>
         </div>
 
