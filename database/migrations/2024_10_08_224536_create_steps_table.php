@@ -14,13 +14,14 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('project_id')
-                ->constrained('projects')
-                ->onDelete('cascade');
-
+            ->constrained('projects')
+            ->onDelete('cascade');
+            
             $table->text('title');
             $table->json('info');
             $table->json('options');
-            $table->integer('stepNum');
+            $table->integer('step_number');
+            $table->boolean('is_default')->default(false);
 
             $table->timestamps();
         });

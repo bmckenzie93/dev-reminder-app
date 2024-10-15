@@ -15,7 +15,8 @@ class Step extends Model
         'description',
         'info',
         'options',
-        'stepNum',
+        'step_number',
+        'is_default'
     ];
 
     protected $casts = [ // Automatically cast JSON to an array
@@ -23,6 +24,10 @@ class Step extends Model
         'options' => 'array',
     ];
 
+    public function projects() {
+        return $this->belongsToMany(Project::class, 'project_step');
+    }
+    
     public function project()
     {
         return $this->belongsTo(Project::class);

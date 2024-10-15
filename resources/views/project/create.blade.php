@@ -22,7 +22,7 @@
 
     <!-- Name Field -->
     <div class="form-group">
-      <input type="text" name="name" id="name" value="{{ $project->name }}">
+      <input type="text" name="name" id="name" value="{{old('name')}}">
       <label for="name">Name</label>
     </div>
     @error('name')
@@ -31,28 +31,20 @@
 
     <!-- Description Field -->
     <div class="form-group">
-      <input type="text" name="description" id="description" value="{{ $project->description }}">
+      <input type="text" name="description" id="description" value="{{old('description')}}">
       <label for="description">Description</label>
     </div>
     @error('description')
       <p class="error-message">{{ $message }}</p>
     @enderror
 
-    <!-- Steps Field -->
-    <div class="form-group">
-      <label for="steps">Steps</label>
-      @foreach ($project->steps as $index => $step)
-        <input type="text" name="steps[]" id="step{{ $index }}" value="{{ $step }}" placeholder="Enter step {{ $index + 1 }}">
-      @endforeach
-    </div>
-    @error('steps')
-      <p class="error-message">{{ $message }}</p>
-    @enderror
+    <!-- STEPS -->
+    <!-- STEPS NEED TO GO HERE -->
+    <!-- STEPS -->
+    <!-- STEPS -->
+    <!-- STEPS -->
 
-    <!-- Add a new step input -->
-    <div class="form-group">
-      <button type="button" id="add-step">Add Step</button>
-    </div>
+
 
     <!-- Submit Field -->
     <div class="form-group">

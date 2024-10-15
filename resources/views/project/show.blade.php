@@ -1,17 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-  <a href="{{route('project.index')}}">< Project List</a>
-  <a href="{{route('project.edit', ['project'=> $project])}}">Edit This Project</a>
 
-  <h1>Project #{{$project->id}}</h1>
-  <h2>{{$project->name}}</h2>
+<div class="row bg-primary">
+  <div class="col-12 d-flex justify-content-between">
+    <a href="{{route('project.index')}}" class="btn btn-primary">< Project List</a>
+    <a href="{{route('project.edit', ['project'=> $project])}}" class="text-white btn btn-primary">Edit This Project</a>
+  </div>
+</div>
+
+<div class="container pt-4">
+  <h1>{{$project->name}}</h1>
+  <p>ID #{{$project->id}}</p>
   <p>{{ $project->description }}</p>
 
   @foreach($project->steps as $steps)
   <hr>
-    <div>
-      <p>Step #{{ $steps->stepNum }}</p>
+    <div class="py-4">
+      <p>Step #{{ $steps->step_number }}</p>
       <p>{{$steps->title}}</p>
       <p>{{$steps->description}}</p>
       <ul>
@@ -30,4 +36,5 @@
     </div>
     <hr>
   @endforeach
+</div>
 @endsection

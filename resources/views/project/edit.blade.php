@@ -13,9 +13,17 @@
 
 
 @section('content')
-  <a href="{{ route('dashboard') }}">Back to dashboard</a>
+<div class="row bg-primary">
+  <div class="col-12 d-flex justify-content-between align-itens-center">
+    <a href="{{route('project.index')}}" class="btn btn-primary">< Project List</a>
+    <p class="text-white">#{{ $project->id }}</p>
+  </div>
+</div>
+
+<div class="container">
+    
   
-  <h1>Edit Project #{{ $project->id }}</h1>
+  <h1>Edit Project </h1>
 
 <form method="POST" action="{{ route('project.update', ['project' => $project->id]) }}">
     @csrf
@@ -32,7 +40,7 @@
 
     <!-- Description Field -->
     <div class="form-group">
-      <input type="text" name="description" id="description" value="{{ $project->description }}">
+      <textarea name="description" id="description" class="form-control">{{ old('description', $project->description) }}</textarea>
       <label for="description">Description</label>
     </div>
     @error('description')
@@ -81,4 +89,6 @@
       <button type="submit" class="btn btn-danger" id="delete">Delete Project</button>
     </div>
   </form>
+
+</div>
 @endsection

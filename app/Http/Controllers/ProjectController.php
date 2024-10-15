@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Step;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -68,18 +69,40 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        // Validate and update project
+        // Validate project fields and steps
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'steps' => 'nullable|array',
         ]);
-
-        $project->update($validated);
-
+    
+        // Update the project (without steps)
+        $project->update([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+        ]);
+    
+        // Now handle the steps separately
+        if ($request->has('steps')) {
+            foreach ($validated['steps'] as $stepData) {
+                // Decode the JSON string to PHP array
+                $stepData = json_decode($stepData, true);
+    
+                // Assuming steps are stored with an 'id' field to identify them
+                $step = Step::find($stepData['id']);
+                if ($step) {
+                    $step->update($stepData); // Update step fields
+                } else {
+                    // Optionally create a new step if one doesn't exist
+                    $project->steps()->create($stepData);
+                }
+            }
+        }
+    
         return redirect()->route('project.show', ['project' => $project->id])
             ->with('success', 'Project updated successfully!');
     }
+    
 
     /**
      * Remove the specified resource from storage.

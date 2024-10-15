@@ -11,9 +11,24 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'description',
+        'steps'
     ];
 
+    public function customSteps()
+    {
+        return $this->belongsToMany(Step::class, 'project_step');
+    }
+
+        // Get all steps (default + custom)
+    public function getAllSteps()
+    {
+        $defaultSteps = Step::where('is_default', true)->get(); // Get default steps
+        $customSteps = $this->customSteps; // Get custom steps for this project
+
+        return $defaultSteps->merge($customSteps); // Merge them together
+    }
 
     public function steps()
     {

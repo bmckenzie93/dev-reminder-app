@@ -25,7 +25,7 @@ class StepFactory extends Factory
             'title' => fake()->sentence(5),
             'info' => fake()->sentences(2),
             'options' => fake()->sentences(2),
-            'stepNum' => self::$stepNumber++, // Increment stepNum for each new factory instance
+            'step_number' => self::$stepNumber++, // Increment step number for each new factory instance
             'created_at' => fake()->dateTimeBetween('-2 years'),
             'updated_at' => fake()->dateTimeBetween('-2 years', 'now'), 
         ];
